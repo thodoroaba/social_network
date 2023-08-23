@@ -1,28 +1,35 @@
 package org.example;
 
+import com.mysql.cj.x.protobuf.MysqlxDatatypes;
+
 import java.sql.*;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
-        String connectionUrl = "jdbc:mysql://localhost:3306/javadbschool1";
-        String username = "root";
-        String password = "pass";
+        String connectionUrl = "jdbc:mysql://localhost:3306/social_network";
+        String dbUser = "root";
+        String dbPass = "0745201259";
 
         Connection connection = DriverManager.getConnection(connectionUrl,
-                username, password);
+                dbUser, dbPass);
 
-//        Statement ps = connection.createStatement();
-//        ResultSet rs = ps.executeQuery("SELECT * FROM customers");
-//        while (rs.next()) {
-//            System.out.println(rs.getString("country"));
-//        }
+        Scanner input = new Scanner(System.in);
+        System.out.println("Insert username");
+        String username = input.nextLine();
+        System.out.println("Insert password");
+        String password = input.nextLine();
+        String qu = String.format("select username from user where username = '%s' and password = '%s';" , username , password);
 
-        PreparedStatement ps = connection.prepareStatement("SELECT * FROM customers WHERE id = ?;");
-        ps.setInt(1, 1);
+        PreparedStatement ps = connection.prepareStatement("SELECT * FROM user WHERE username = ? AND password = ? ;");
+        ps.setString(1, username);
+        ps.setString(2, password);
         ResultSet rs = ps.executeQuery();
 
-        while (rs.next()) {
-            System.out.println(rs.getString("country"));
-        }
+            if(rs.next()){
+                System.out.println("Welcome " + username);
+            }else{
+                System.out.println("Authentication failed");
+            }
     }
 }
