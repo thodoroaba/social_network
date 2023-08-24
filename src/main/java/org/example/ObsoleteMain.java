@@ -2,7 +2,7 @@ package org.example;
 
 import java.sql.*;
 
-public class Main {
+public class ObsoleteMain {
     public static void main(String[] args) throws SQLException {
         String connectionUrl = "jdbc:mysql://localhost:3306/social_network";
         String username = "root";

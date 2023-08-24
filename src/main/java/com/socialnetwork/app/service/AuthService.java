@@ -1,5 +1,9 @@
 package com.socialnetwork.app.service;
 
+import com.socialnetwork.app.repo.UserRepo;
+
+import java.sql.SQLException;
+
 public class AuthService {
     private static AuthService instance;
 
@@ -14,9 +18,9 @@ public class AuthService {
         return instance;
     }
 
-    public boolean checkAuth(String username, String password) {
+    public boolean checkAuth(String username, String password) throws SQLException {
         boolean result = false;
-        // TODO
+        result = UserRepo.getInstance().checkAuth(username, password);
         return result;
     }
 }

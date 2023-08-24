@@ -9,6 +9,22 @@ import java.util.Properties;
 public class PropertiesReader {
     private static PropertiesReader instance;
 
+    private String dbURL;
+    private String dbName;
+    private String dbPass;
+
+    public String getDbURL() {
+        return dbURL;
+    }
+
+    public String getDbName() {
+        return dbName;
+    }
+
+    public String getDbPass() {
+        return dbPass;
+    }
+
     private PropertiesReader(){
 
     }
@@ -21,17 +37,18 @@ public class PropertiesReader {
     }
 
     public void loadProps(){
-        try (InputStream input = new FileInputStream("C:\\Users\\Mircea\\app.properties")) {
+        try (InputStream input = new FileInputStream("C:\\Users\\Alex Apostol Florin\\app.properties")) {
 
             Properties prop = new Properties();
 
             // load a properties file
             prop.load(input);
 
+            this.dbName=prop.getProperty("dbName");
+            this.dbURL=prop.getProperty("URL");
+            this.dbPass=prop.getProperty("dbPass");
             // get the property value and print it out
-            System.out.println(prop.getProperty("URL"));
-            System.out.println(prop.getProperty("dbName"));
-            System.out.println(prop.getProperty("dbPass"));
+
 
         } catch (IOException ex) {
             ex.printStackTrace();
