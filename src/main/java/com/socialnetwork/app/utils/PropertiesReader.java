@@ -37,7 +37,7 @@ public class PropertiesReader {
     }
 
     public void loadProps(){
-        try (InputStream input = new FileInputStream("C:\\Users\\Alex Apostol Florin\\app.properties")) {
+        try (InputStream input = new FileInputStream("D:\\DB_training\\JavaTraining23\\app.properties")) {
 
             Properties prop = new Properties();
 

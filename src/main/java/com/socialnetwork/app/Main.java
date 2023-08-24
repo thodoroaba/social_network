@@ -1,10 +1,14 @@
 package com.socialnetwork.app;
 
+import com.socialnetwork.app.controller.UserController;
+import com.socialnetwork.app.model.User;
 import com.socialnetwork.app.service.AuthService;
 import com.socialnetwork.app.utils.PropertiesReader;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
@@ -19,7 +23,16 @@ public class Main {
         int option = input.nextInt();
         switch (option){
             case 1:
+                List<User> userList = UserController.getInstance().getAllUsers();
 
+//               List<User> userList2 = userList
+//                        .stream()
+//                        .filter(user -> user.getUsername().startsWith("A"))
+//                        .collect(Collectors.toList());
+
+                userList.stream().forEach(user -> {
+                    System.out.println(user);
+                });
                 break;
             case 2:
                 //TODO

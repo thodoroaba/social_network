@@ -11,16 +11,52 @@ public class User {
     private String emailAddress;
     private Date registeredOn;
 
-    public User(String id, String username, String password, String profilePic, String emailAddress, Date registeredOn) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.profilePic = profilePic;
-        this.emailAddress = emailAddress;
-        this.registeredOn = registeredOn;
+    public User(UserBuilder userBuilder) {
+        this.id = userBuilder.getId();
+        this.username = userBuilder.getUsername();
+        this.password = userBuilder.getPassword();
+        this.profilePic = userBuilder.getProfilePic();
+        this.emailAddress = userBuilder.getEmailAddress();
+        this.registeredOn = userBuilder.getRegisteredOn();
     }
 
-    public class UserBuilder {
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", profilePic='" + profilePic + '\'' +
+                ", emailAddress='" + emailAddress + '\'' +
+                ", registeredOn=" + registeredOn +
+                '}';
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getProfilePic() {
+        return profilePic;
+    }
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public Date getRegisteredOn() {
+        return registeredOn;
+    }
+
+    public static class UserBuilder {
         private String id;
         private String username;
         private String password;
@@ -29,7 +65,7 @@ public class User {
         private Date registeredOn;
 
         public User build() {
-            return new User(id, username, password, profilePic, emailAddress, registeredOn);
+            return new User(this);
         }
 
         public String getId() {
@@ -85,5 +121,6 @@ public class User {
             this.registeredOn = registeredOn;
             return this;
         }
+
     }
 }
